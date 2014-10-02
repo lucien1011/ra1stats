@@ -12,7 +12,6 @@ def submitBatchJob(jobCmd, indexDict, subScript, jobScript, condorTemplate, jobS
         os.system("chmod +x "+jobScriptFileName)
     mode = "a" if doCopy else "w"
     jobScriptFileName="%s/%s"%(os.environ["PWD"],jobScriptFileName)
-    print jobScriptFileName
     with open(jobScriptFileName, mode) as file :
         print >>file
         for item in ["PYTHONPATH", "LD_LIBRARY_PATH"] :
@@ -31,7 +30,6 @@ def submitBatchJob(jobCmd, indexDict, subScript, jobScript, condorTemplate, jobS
     else :
         arg = jobScriptFileName
     subCmd = "%s %s"%(subScript,arg)
-    print subCmd
     os.chdir(os.environ["PWD"]+"/"+configuration.directories.job())
     os.system(subCmd)
     os.chdir(os.environ["PWD"])
